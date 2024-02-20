@@ -4,10 +4,6 @@ import 'package:registration/view/custombutton.dart';
 import 'package:registration/view/customtext.dart';
 import 'package:registration/view/customtextfield.dart';
 
-void main() {
-  runApp(const Registration());
-}
-
 class Registration extends StatelessWidget {
   const Registration({super.key});
 
@@ -24,82 +20,102 @@ class Registration extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Registration page."),
         foregroundColor: appBlackColor,
+        backgroundColor: titleColor,
         automaticallyImplyLeading: true,
       ),
-      body: SingleChildScrollView(
-          child: Padding(
-        padding: const EdgeInsets.fromLTRB(50, 30, 50, 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("background.jpg"), fit: BoxFit.fill)),
+          ),
+          SingleChildScrollView(
+              child: Padding(
+            padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset("assets/images/"),
-              ],
-            ),
-            const SizedBox(height: 20),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                customtitleText(
-                  label: "Welcome to the Registration page",
-                  labelColor: appBlackColor,
-                  labelFontSize: 30,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset("assets/images/registration logo.png"),
+                  ],
                 ),
+                const SizedBox(height: 20),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    customtitleText(
+                      label: "Welcome to the Registration page",
+                      labelColor: appBlackColor,
+                      labelFontSize: 30,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const customtitleText(
+                  label: "First name.",
+                ),
+                customTextField(
+                  userFieldController: firstnameController,
+                  icon: Icons.person,
+                  hint: "First name.",
+                ),
+                const customtitleText(label: "Second name."),
+                customTextField(
+                  userFieldController: secondnameController,
+                  icon: Icons.person,
+                  hint: "Second name.",
+                ),
+                const customtitleText(label: "Phone number."),
+                customTextField(
+                  userFieldController: phonenumberController,
+                  icon: Icons.phone,
+                  hint: "Phone number",
+                ),
+                const customtitleText(label: "E-mail."),
+                customTextField(
+                  userFieldController: emailController,
+                  icon: Icons.language,
+                  hint: "E-mail",
+                ),
+                const customtitleText(label: "Password"),
+                customTextField(
+                    userFieldController: passwordController,
+                    icon: Icons.lock,
+                    hidetext: true,
+                    isPassword: true,
+                    hint: "Password"),
+                const customtitleText(label: "Re-enter Password"),
+                customTextField(
+                  userFieldController: confirmpasswordController,
+                  icon: Icons.lock,
+                  hidetext: true,
+                  isPassword: true,
+                  hint: "Confirm password",
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    customButton(
+                      buttoncolor: titleColor,
+                      buttonlabel: "Register",
+                      confirmpasswordController: confirmpasswordController,
+                    ),
+                  ],
+                )
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            const customtitleText(label: "First name."),
-            customTextField(
-              userFieldController: firstnameController,
-              hint: "FIrst name.",
-            ),
-            const customtitleText(label: "Second name."),
-            customTextField(
-              userFieldController: secondnameController,
-              hint: "Second name.",
-            ),
-            const customtitleText(label: "Phone number."),
-            customTextField(
-              userFieldController: phonenumberController,
-              hint: "Phone number",
-            ),
-            const customtitleText(label: "E-mail."),
-            customTextField(
-              userFieldController: emailController,
-              hint: "E-mail",
-            ),
-            const customtitleText(label: "Password"),
-            customTextField(
-                userFieldController: passwordController,
-                icon: Icons.lock,
-                hidetext: true,
-                isPassword: true,
-                hint: "Password"),
-            const customtitleText(label: "Password"),
-            customTextField(
-              userFieldController: passwordController,
-              icon: Icons.lock,
-              hidetext: true,
-              isPassword: true,
-              hint: "Confirm password",
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            customButton(
-              buttoncolor: appgreenColor,
-              buttonlabel: "Register",
-              passwordController: passwordController,
-              confirmpasswordController: confirmpasswordController,
-            )
-          ],
-        ),
-      )),
+          )),
+        ],
+      ),
     );
   }
 }
